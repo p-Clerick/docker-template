@@ -1,4 +1,5 @@
 FROM php:7.4-apache
+
 MAINTAINER p-Clerick
 RUN apt-get update && apt-get install -y --fix-missing \
     apt-utils \
@@ -19,12 +20,17 @@ RUN apt-get update && apt-get install -y \
     libpng-dev
 
 RUN docker-php-ext-install  soap zip mysqli pdo_mysql bcmath exif sockets gd
+
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+
 RUN php composer-setup.php
 RUN php -r "unlink('composer-setup.php');"
+RUN mkdir -p /usr/local/bin
+RUN mv composer.phar /usr/local/bin/composer
 
 RUN a2enmod rewrite
 RUN service apache2 restart
+
 
 
 
