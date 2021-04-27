@@ -2,4 +2,4 @@
 base
 sql
 data/LOGS
-data/root
+data/dev/.composer
